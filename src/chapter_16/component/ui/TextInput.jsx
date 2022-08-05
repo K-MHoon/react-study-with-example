@@ -19,3 +19,5 @@ function TextInput(props) {
 
   return <StyledTextarea height={height} value={value} onChange={onChange}></StyledTextarea>;
 }
+
+export default TextInput;
