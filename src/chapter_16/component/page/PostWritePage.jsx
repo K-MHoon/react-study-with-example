@@ -47,9 +47,16 @@ function PostWritePage(props) {
             setContent(event.target.value);
           }}
         />
+        <Button
+          title="글 작성하기"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
       </Container>
     </Wrapper>
   );
-
 }
+
+export default PostWritePage;
 

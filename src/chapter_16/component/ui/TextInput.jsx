@@ -6,7 +6,6 @@ const StyledTextarea = styled.textarea`
   ${(props) => 
     props.height &&
     `
-      
     height: ${props.height}px;
   `}
   padding: 16px;

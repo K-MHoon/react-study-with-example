@@ -2,13 +2,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Blocks from './chapter_15/Blocks';
+import App from './App';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <Blocks />
+    <App />
   </React.StrictMode>,
 );
 
