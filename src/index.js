@@ -2,13 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import EventPractice from "./chapter_18/EventPractice";
+import IterationItems from "./chapter_19/IterationItems";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <EventPractice />
+    <IterationItems />
   </React.StrictMode>
 );
 
