@@ -2,13 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import MyComponentParent from "./chapter_17/MyComponentParent";
+import EventPractice from "./chapter_18/EventPractice";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <MyComponentParent />
+    <EventPractice />
   </React.StrictMode>
 );
 
