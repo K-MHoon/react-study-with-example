@@ -2,13 +2,13 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import SassComponent from "./chapter_21/SassComponent";
+import CSSModule from "./chapter_21/CSSModule";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <SassComponent />
+    <CSSModule />
   </React.StrictMode>
 );
 
