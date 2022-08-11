@@ -1,14 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import App from "./chapter_22/App";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import StyledComponent from "./chapter_21/StyledComponent";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
   <React.StrictMode>
-    <StyledComponent />
+    <App />
   </React.StrictMode>
 );
 
