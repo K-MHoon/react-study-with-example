@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useReducer } from "react";
 import { useRef } from "react";
 import TodoInsert from "./components/TodoInsert";
 import TodoList from "./components/TodoList";
@@ -20,6 +20,21 @@ function createBulkTodos() {
   return array;
 }
 
+function todoReducer(todos, action) {
+  switch (action.type) {
+    case "INSERT":
+      return todos.concat(action.todo);
+    case "REMOVE":
+      return todos.filter((todo) => todo.id !== action.id);
+    case "TOGGLE":
+      return todos.map((todo) =>
+        todo.id === action.id ? { ...todo, checked: !todo.checked } : todo
+      );
+    default:
+      return todos;
+  }
+}
+
 const App = () => {
   // const [todos, setTodos] = useState([
   //   {
@@ -38,10 +53,14 @@ const App = () => {
   //     checked: false,
   //   },
   // ]);
-  const [todos, setTodos] = useState(createBulkTodos);
+  // const [todos, setTodos] = useState(createBulkTodos);
+
+  // 세 번째 파라미터에 초기 상태를 넣어주면, 컴포넌트가 처음 렌더링될 때만 호출된다.
+  const [todos, dispatch] = useReducer(todoReducer, undefined, createBulkTodos);
 
   const onRemove = useCallback((id) => {
-    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    // setTodos((todos) => todos.filter((todo) => todo.id !== id));
+    dispatch({ type: "REMOVE", id });
   }, []);
 
   // const nextId = useRef(4);
@@ -53,16 +72,18 @@ const App = () => {
       text,
       checked: false,
     };
-    setTodos((todos) => todos.concat(todo));
+    // setTodos((todos) => todos.concat(todo));
+    dispatch({ type: "INSERT", todo });
     nextId.current += 1;
   }, []);
 
   const onToggle = useCallback((id) => {
-    setTodos((todos) =>
-      todos.map((todo) =>
-        todo.id === id ? { ...todo, checked: !todo.checked } : todo
-      )
-    );
+    // setTodos((todos) =>
+    //   todos.map((todo) =>
+    //     todo.id === id ? { ...todo, checked: !todo.checked } : todo
+    //   )
+    // );
+    dispatch({ type: "TOGGLE", id });
   }, []);
 
   return (
