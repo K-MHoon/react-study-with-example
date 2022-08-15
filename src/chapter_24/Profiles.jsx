@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import Profile from "./Profile";
+import WithRouterSample from "./WithRouterSample";
 
 const Profiles = () => {
   return (
@@ -16,7 +17,7 @@ const Profiles = () => {
       </ul>
 
       <Routes>
-        <Route path="/*" element={<div>사용자를 선택해 주세요.</div>} />
+        <Route path="/" element={<div>사용자를 선택해 주세요.</div>} />
         <Route path=":username" element={<Profile />} />
       </Routes>
     </div>
