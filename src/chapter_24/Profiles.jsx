@@ -8,20 +8,16 @@ const Profiles = () => {
       <h3>사용자 목록 : </h3>
       <ul>
         <li>
-          <Link to="profiles/kmhoon">K-MHoon</Link>
+          <Link to="kmhoon">K-MHoon</Link>
         </li>
         <li>
-          <Link to="profiles/ringdingdong">Ringdingdong</Link>
+          <Link to="ringdingdong">Ringdingdong</Link>
         </li>
       </ul>
 
       <Routes>
-        <Route
-          path="profiles"
-          exact
-          render={() => <div>사용자를 선택해 주세요.</div>}
-        />
-        <Route path="profiles/:username" element={<Profile />} />
+        <Route path="/*" element={<div>사용자를 선택해 주세요.</div>} />
+        <Route path=":username" element={<Profile />} />
       </Routes>
     </div>
   );
