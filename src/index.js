@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { createRoot } from "react-dom/client";
-import App from "./chapter_27/App";
+import App from "./chapter_28/App";
 import "./index.css";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reportWebVitals from "./reportWebVitals";
 import { legacy_createStore as createStore } from "redux";
-import rootReducer from "./chapter_27/modules";
+import rootReducer from "./chapter_28/modules";
 import { Provider } from "react-redux";
 
 const store = createStore(rootReducer, composeWithDevTools());
