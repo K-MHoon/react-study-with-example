@@ -5,11 +5,13 @@ import App from "./chapter_28/App";
 import "./index.css";
 import { composeWithDevTools } from "redux-devtools-extension";
 import reportWebVitals from "./reportWebVitals";
-import { legacy_createStore as createStore } from "redux";
+import { applyMiddleware, legacy_createStore as createStore } from "redux";
 import rootReducer from "./chapter_28/modules";
 import { Provider } from "react-redux";
+import loggerMiddleware from "./chapter_28/lib/loggerMiddleware";
 
-const store = createStore(rootReducer, composeWithDevTools());
+// const store = createStore(rootReducer, composeWithDevTools());
+const store = createStore(rootReducer, applyMiddleware(loggerMiddleware));
 
 const container = document.getElementById("root");
 const root = createRoot(container);
