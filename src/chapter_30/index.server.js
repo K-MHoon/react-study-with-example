@@ -19,7 +19,7 @@ const chunks = Object.keys(manifest.files)
   .map((key) => `<script src="${manifest.files[key]}"></script>`)
   .join("");
 
-function createPage(root) {
+function createPage(root, stateScript) {
   return `<!doctype html>
   <html lang="en">
   <head>
@@ -39,6 +39,7 @@ function createPage(root) {
    <div id="root">
     ${root}
    </div>
+   ${stateScript}
    ${chunks}
    <script defer="defer" src="${manifest.files["main.js"]}"></script>
    </body>
@@ -78,7 +79,11 @@ const serverRender = async (req, res, next) => {
   preloadContext.done = true;
 
   const root = ReactDOMServer.renderToString(jsx);
-  res.send(createPage(root));
+
+  const stateString = JSON.stringify(store.getState()).replace(/</g, "\\u003c"); // 악성 스크립트 실행 방지 (<) 치환
+  const stateScript = `<script>__PRELOADED_STATE__= ${stateString}</script>`; // 리덕스 초기 상태 스크립트 주입
+
+  res.send(createPage(root, stateScript));
 };
 
 // static 미들웨어를 활용하여, 서버를 통해 build에 있는 js, css 정적파일에 접근

@@ -24,7 +24,11 @@ import createSagaMiddleware from "redux-saga";
 
 // sagaMiddleware.run(rootSaga);
 
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+const store = createStore(
+  rootReducer,
+  window.__PRELOADED_STATE__,
+  applyMiddleware(ReduxThunk)
+);
 
 const container = document.getElementById("root");
 const root = createRoot(container);
