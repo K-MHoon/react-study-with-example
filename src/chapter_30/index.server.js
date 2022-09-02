@@ -4,6 +4,10 @@ import { StaticRouter } from "react-router-dom/server";
 import App from "./App";
 import path from "path";
 import fs from "fs";
+import { legacy_createStore as createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import rootReducer from "./modules";
 
 const manifest = JSON.parse(
   fs.readFileSync(path.resolve("./build/asset-manifest.json"), "utf8")
@@ -47,10 +51,14 @@ const app = express();
 const serverRender = (req, res, next) => {
   // 이 함수는 404가 떠야 하는 상황에 서버 사이드 렌더링을 해준다.
   const context = {};
+  const store = createStore(rootReducer, applyMiddleware(thunk));
+
   const jsx = (
-    <StaticRouter location={req.url} context={context}>
-      <App />
-    </StaticRouter>
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={context}>
+        <App />
+      </StaticRouter>
+    </Provider>
   );
   const root = ReactDOMServer.renderToString(jsx);
   res.send(createPage(root));
