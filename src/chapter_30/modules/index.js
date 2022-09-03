@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import users, { usersSage } from "./users";
+import users, { usersSaga } from "./users";
 import { all } from "redux-saga/effects";
 
 export function* rootSaga() {
-  yield all([usersSage()]);
+  yield all([usersSaga()]);
 }
 
 const rootReducer = combineReducers({ users });
