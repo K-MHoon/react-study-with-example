@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./chapter_30/App";
 import "./index.css";
 import { composeWithDevTools } from "redux-devtools-extension";
@@ -13,6 +13,8 @@ import loggerMiddleware from "./chapter_28/lib/loggerMiddleware";
 import logger from "redux-logger";
 import ReduxThunk from "redux-thunk";
 import createSagaMiddleware from "redux-saga";
+import { loadableReady } from "@loadable/component";
+import { ReactDOM } from "react";
 
 // const store = createStore(rootReducer, composeWithDevTools());
 const sagaMiddleware = createSagaMiddleware();
@@ -30,18 +32,25 @@ const store = createStore(
 
 sagaMiddleware.run(rootSaga);
 
+const Root = () => {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+};
+
 const container = document.getElementById("root");
-const root = createRoot(container);
-root.render(
-  // <Provider store={store}>
-  //   <App />
-  // </Provider>
-  <Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </Provider>
-);
+
+if (process.env.NODE_ENV === "production") {
+  loadableReady(() => {
+    hydrateRoot(container, <Root />);
+  });
+} else {
+  createRoot(container).render(<Root />);
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
