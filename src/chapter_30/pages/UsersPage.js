@@ -1,6 +1,6 @@
-import UsersContainer from "../containers/UsersContainer";
-import UserContainer from "../containers/UserContainer";
-import { Route, Routes } from "react-router-dom";
+import UsersContainer from '../containers/UsersContainer';
+import UserContainer from '../containers/UserContainer';
+import { Route, Routes } from 'react-router-dom';
 
 const UsersPage = () => {
   return (

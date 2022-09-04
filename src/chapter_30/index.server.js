@@ -1,18 +1,18 @@
-import ReactDOMServer from "react-dom/server";
-import express from "express";
-import { StaticRouter } from "react-router-dom/server";
-import App from "./App";
-import path from "path";
-import fs from "fs";
-import { legacy_createStore as createStore, applyMiddleware } from "redux";
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import rootReducer, { rootSaga } from "./modules";
-import PreloadContext from "../lib/PreloadContext";
-import { ChunkExtractor, ChunkExtractorManager } from "@loadable/server";
-import createSagaMiddleware, { END } from "@redux-saga/core";
+import ReactDOMServer from 'react-dom/server';
+import express from 'express';
+import { StaticRouter } from 'react-router-dom/server';
+import App from './App';
+import path from 'path';
+import fs from 'fs';
+import { legacy_createStore as createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import rootReducer, { rootSaga } from './modules';
+import PreloadContext from '../lib/PreloadContext';
+import { ChunkExtractor, ChunkExtractorManager } from '@loadable/server';
+import createSagaMiddleware, { END } from '@redux-saga/core';
 
-const statsFile = path.resolve("./build/loadable-stats.json");
+const statsFile = path.resolve('./build/loadable-stats.json');
 
 // const manifest = JSON.parse(
 //   fs.readFileSync(path.resolve("./build/asset-manifest.json"), "utf8")
@@ -60,7 +60,7 @@ const serverRender = async (req, res, next) => {
 
   const store = createStore(
     rootReducer,
-    applyMiddleware(thunk, sagaMiddleware)
+    applyMiddleware(thunk, sagaMiddleware),
   );
 
   const sagaPromise = sagaMiddleware.run(rootSaga).toPromise();
@@ -97,7 +97,7 @@ const serverRender = async (req, res, next) => {
 
   const root = ReactDOMServer.renderToString(jsx);
 
-  const stateString = JSON.stringify(store.getState()).replace(/</g, "\\u003c"); // 악성 스크립트 실행 방지 (<) 치환
+  const stateString = JSON.stringify(store.getState()).replace(/</g, '\\u003c'); // 악성 스크립트 실행 방지 (<) 치환
   const stateScript = `<script>__PRELOADED_STATE__= ${stateString}</script>`; // 리덕스 초기 상태 스크립트 주입
 
   const tags = {
@@ -110,7 +110,7 @@ const serverRender = async (req, res, next) => {
 };
 
 // static 미들웨어를 활용하여, 서버를 통해 build에 있는 js, css 정적파일에 접근
-const serve = express.static(path.resolve("./build"), {
+const serve = express.static(path.resolve('./build'), {
   index: false,
 });
 
@@ -118,5 +118,5 @@ app.use(serve);
 app.use(serverRender);
 
 app.listen(5000, () => {
-  console.log("Running on http://localhost:5000");
+  console.log('Running on http://localhost:5000');
 });

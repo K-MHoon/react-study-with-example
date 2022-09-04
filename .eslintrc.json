@@ -1,0 +1,27 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es2021": true
+    },
+    "extends": ["eslint:recommended", "prettier", "plugin:react/recommended"],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "overrides": [
+    ],
+    "parserOptions": {
+        "sourceType": "module",
+        "ecmaVersion": "latest",
+        "ecmaFeatures":  {
+            "jsx" : true
+        }
+    },
+    "rules": {
+        "no-unused-vars":"warn",
+        "no-console":"off",
+        "react/prop-types" : "off",
+        "react/react-in-jsx-scope" : "off"
+    }
+}
