@@ -43,6 +43,7 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "koa": "^2.13.4",
+    "koa-router": "^12.0.0",
     "mini-css-extract-plugin": "^2.4.5",
     "open-color": "^1.9.1",
     "postcss": "^8.4.4",
@@ -89,7 +90,9 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "start:server": "node dist/server.js",
-    "build:server": "node scripts/build.server.js"
+    "build:server": "node scripts/build.server.js",
+    "start:31": "node ./src/chapter_31/index.js",
+    "start:31dev": "nodemon --watch ./src/chapter_31 src/chapter_31/index.js"
   },
   "eslintConfig": {
     "extends": [
@@ -178,5 +181,8 @@
     "plugins": [
       "@loadable/babel-plugin"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
   }
 }
