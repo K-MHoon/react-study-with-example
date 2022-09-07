@@ -1,12 +1,9 @@
-// 이 파일에서 no-global-assign ESLint 옵션을 비활성화 한다.
-
 require('dotenv').config();
-const Koa = require('koa');
-const Router = require('koa-router');
-const bodyParser = require('koa-bodyparser');
-const mongoose = require('mongoose');
-
-const api = require('./api');
+import Koa from 'koa';
+import Router from 'koa-router';
+import bodyParser from 'koa-bodyparser';
+import mongoose from 'mongoose';
+import api from './api/index';
 
 // 비구조화 할당을 통해 process.env 내부 값에 대한 레퍼런스 만들기
 // eslint-disable-next-line no-undef
