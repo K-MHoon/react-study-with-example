@@ -32,6 +32,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
+    "esm": "^3.2.25",
     "express": "^4.18.1",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.0",
@@ -93,8 +94,8 @@
     "test": "node scripts/test.js",
     "start:server": "node dist/server.js",
     "build:server": "node scripts/build.server.js",
-    "start:31": "node ./src/chapter_31/index.js",
-    "start:31dev": "nodemon --watch ./src/chapter_31 src/chapter_31/index.js"
+    "start:31": "node -r esm ./src/chapter_31",
+    "start:31dev": "nodemon --watch ./src/chapter_31 -r esm src/chapter_31/index.js"
   },
   "eslintConfig": {
     "extends": [
